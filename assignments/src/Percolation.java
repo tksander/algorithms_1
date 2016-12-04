@@ -1,4 +1,4 @@
-import edu.princeton.cs.algs4.*
+import edu.princeton.cs.algs4.*;
 
 public class Percolation {
    private WeightedQuickUnionUF grid;
@@ -20,14 +20,15 @@ public class Percolation {
       gridExtent = n - 1;
 
       grid = new WeightedQuickUnionUF(arraySize + connectors);
+      // connects bottom row and top row to single site
       for (int i = 0; i < n; i++) {
          // connect top row
          grid.union(topIndex, i);
          // connect bottom row
-         grid.union(bottomIndex, (arraySize - 1) - i)
+         grid.union(bottomIndex, (arraySize - 1) - i);
       }
       // Initiates sites to false
-      openSites[n][n];
+      openSites = new boolean[n][n];
    }
 
     /**
@@ -43,19 +44,19 @@ public class Percolation {
 
       // up
       if (row - 1 > 0 && isOpen(row - 1, col)) {
-         grid.union(decodeNum(row - 1, col), siteIndex)
+         grid.union(decodeNum(row - 1, col), siteIndex);
       }
       // down
       if (row + 1 < gridExtent && isOpen(row + 1, col)) {
-         grid.union(decodeNum(row + 1, col), siteIndex)
+         grid.union(decodeNum(row + 1, col), siteIndex);
       }
       // left
       if (col - 1 > 0 && isOpen(row, col - 1)) {
-         grid.union(decodeNum(row - 1, col), siteIndex)
+         grid.union(decodeNum(row - 1, col), siteIndex);
       }
       // right
       if (col + 1 < gridExtent && isOpen(row, col + 1)) {
-         grid.union(decodeNum(row, col + 1), siteIndex)
+         grid.union(decodeNum(row, col + 1), siteIndex);
       }
    }
 
@@ -86,17 +87,20 @@ public class Percolation {
     * @return
      */
    public boolean percolates() {
-      grid.connected(topIndex, bottomIndex)
+      return grid.connected(topIndex, bottomIndex);
    }
+   
+  // test client (optional)
+   public static void main(String[] args) {
 
-   public static void main(String[] args)   // test client (optional)
+   }
 
    /**
     * Converts row/col to array index
     * @param row
     * @param col
     */
-   private decodeNum(int row, int col) {
-      (row == 0) ? return col : (row + 1) * col
+   private int decodeNum(int row, int col) {
+      return (row == 0) ? col : ((row + 1) * col);
    }
 }
