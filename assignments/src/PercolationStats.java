@@ -31,19 +31,18 @@ public class PercolationStats {
                 do {
                     col = StdRandom.uniform(0, n);
                     row = StdRandom.uniform(0, n);
-
-                    grid.open(col, row);
-                } while (grid.isOpen(col, row));
+                } while (grid.isOpen(row, col));
+                grid.open(row, col);
                 runs++;
             }
-           double percolationThreslhold = runs / (n * n);
-            thresholds[trial] = percolationThreslhold;
 
+           double percolationThreslhold = runs / (double)(n * n);
+            thresholds[trial] = percolationThreslhold;
         }
         mean = StdStats.mean(thresholds);
         stddev = StdStats.stddev(thresholds);
         confidenceLo = mean - (1.96 * stddev / Math.sqrt(trials));
-        confidenceLo = mean + (1.96 * stddev / Math.sqrt(trials));
+        confidenceHi = mean + (1.96 * stddev / Math.sqrt(trials));
     }
 
     /**
