@@ -2,47 +2,80 @@
  * Created by tommysander on 12/3/16.
  */
 public class PercolationStats {
+    private double mean;
+    private double stddev;
+    double confidenceLo;
+    double confidenceHi;
 
     /**
-     *  perform trials independent experiments on an n-by-n grid
-      * @param n
+     * perform trials independent experiments on an n-by-n grid
+     *
+     * @param n
      * @param trials
      * @throws IndexOutOfBoundsException unless {@code 0 <= p < n}
      */
     public PercolationStats(int n, int trials) {
-        /**
-         * sample mean of percolation threshold
-         */
-        public double mean() {
-            // todo
-        }
+        double[] thresholds = new double[trials];
 
-        // sample standard deviation of percolation threshold
-        public double stddev() {
-            // todo
-        }
+        if (n < 0) throw new java.lang.IllegalArgumentException("n must be greater than 0");
+        if (trials < 0) throw new java.lang.IllegalArgumentException("There must be at least one trial");
 
-        // low  endpoint of 95% confidence interval
-        public double confidenceLo() {
-            // todo
-        }
+        for (int trial = 0; trial < trials; trial++) {
+            Percolation grid = new Percolation(n);
 
-        // high endpoint of 95% confidence interval
-        public double confidenceHi() {
-            // todo
-        }
+            int col;
+            int row;
+            int runs = 0;
 
-        // test client (described below)
-        public static void main(String[] args) {
-            // todo
-            int N = StdIn.readInt();
-            Percolation grid = new Percolation(N);
-//            Also, include a main() method that takes two command-line
-// arguments n and T, performs T independent computational experiments
-// (discussed above) on an n-by-n grid, and prints the mean, standard deviation,
-// and the 95% confidence interval for the percolation threshold. Use StdRandom
-// to generate random numbers; use StdStats to compute the sample mean and standard deviation.
+            while(!grid.percolates()) {
+                do {
+                    col = StdRandom.uniform(0, n);
+                    row = StdRandom.uniform(0, n);
 
+                    grid.open(col, row);
+                } while (grid.isOpen(col, row));
+                runs++;
+            }
+           double percolationThreslhold = runs / (n * n);
+            thresholds[trial] = percolationThreslhold;
 
         }
+        mean = StdStats.mean(thresholds);
+        stddev = StdStats.stddev(thresholds);
+        confidenceLo = mean - (1.96 * stddev / Math.sqrt(trials));
+        confidenceLo = mean + (1.96 * stddev / Math.sqrt(trials));
+    }
+
+    /**
+     * sample mean of percolation threshold
+     */
+    public double mean() {
+        return mean;
+    }
+
+    // sample standard deviation of percolation threshold
+    public double stddev() {
+        return stddev;
+    }
+
+    // low  endpoint of 95% confidence interval
+    public double confidenceLo() {
+        return confidenceLo;
+    }
+
+    // high endpoint of 95% confidence interval
+    public double confidenceHi() {
+        return confidenceHi;
+    }
+
+    // test client (described below)
+    public static void main(String[] args) {
+        int N = StdIn.readInt();
+        int T = StdIn.readInt();
+        PercolationStats stats = new PercolationStats(N, T);
+
+        System.out.println("Mean                    = " + stats.mean());
+        System.out.println("Standard Deviation      = " + stats.stddev());
+        System.out.println("95% Confidence Interval = " + stats.confidenceLo() + "," + stats.confidenceHi());
+    }
 }

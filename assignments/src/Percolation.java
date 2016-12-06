@@ -105,8 +105,6 @@ public class Percolation {
     * @param col
     */
    private int decodeNum(int row, int col) {
-       System.out.println("row" + row + " col" + col);
-       System.out.println((row == 0) ? col : ((row + 1) * gridN * (col + 1)));
       return (row == 0) ? col : ((row * gridN) + col);
    }
 }
