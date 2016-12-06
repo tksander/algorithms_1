@@ -72,7 +72,7 @@ public class Percolation {
      */
    public boolean isOpen(int row, int col)  // is site (row, col) open?
    {
-      return openSites[row][col];
+      return openSites[row - 1][col - 1];
    }
 
     /**
@@ -83,7 +83,7 @@ public class Percolation {
      */
    public boolean isFull(int row, int col)  // is site (row, col) full?
    {
-      return !openSites[row][col];
+      return !openSites[row - 1][col - 1];
    }
 
    /**
