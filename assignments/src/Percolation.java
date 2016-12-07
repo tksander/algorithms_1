@@ -1,4 +1,4 @@
-import edu.princeton.cs.algs4.*;
+import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
     private WeightedQuickUnionUF grid;
@@ -15,13 +15,15 @@ public class Percolation {
      * @param n-by-n the size of the grid (square)
      */
     public Percolation(int n) {
+
         int arraySize = n * n;
         arraySizeIndex = arraySize - 1;
         int connectors = 2;
         topIndex = arraySizeIndex + 1;
         bottomIndex = arraySizeIndex + 2;
-        gridExtent = n - 1;
         gridN = n;
+
+        if (n < 0) throw new java.lang.IllegalArgumentException("Grid size must be positive");
 
         grid = new WeightedQuickUnionUF(arraySize + connectors);
         // connects bottom row and top row to single site
@@ -85,7 +87,11 @@ public class Percolation {
      */
     public boolean isFull(int row, int col)  // is site (row, col) full?
     {
-        return !openSites[row - 1][col - 1];
+        if (!isOpen(row, col)) {
+           return false;
+        }
+        int index = decodeNum(row, col);
+        return grid.connected(topIndex, index);
     }
 
     /**
@@ -94,6 +100,7 @@ public class Percolation {
      * @return
      */
     public boolean percolates() {
+        if (gridN == 1 && !isOpen(1,1)) return false;
         return grid.connected(topIndex, bottomIndex);
     }
 

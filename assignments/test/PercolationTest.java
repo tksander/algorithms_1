@@ -18,8 +18,17 @@ public class PercolationTest {
     }
 
     @Test
-    public void shouldNotHaveOpenSites() {
-        assertTrue(grid.isFull(1,1));
+    public void shouldNotBeFullIfNotOpenSite() {
+        assertFalse(grid.isFull(1,1));
+    }
+
+    @Test
+    public void shouldHaveFullSites() {
+        grid.open(1,1);
+        grid.open(2,1);
+        grid.open(3,1);
+        grid.open(4,1);
+        assertTrue(grid.isFull(4,1));
     }
 
     @Test

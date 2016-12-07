@@ -1,11 +1,15 @@
+import edu.princeton.cs.algs4.StdRandom;
+import edu.princeton.cs.algs4.StdStats;
+import edu.princeton.cs.algs4.StdIn;
+
 /**
  * Created by tommysander on 12/3/16.
  */
 public class PercolationStats {
     private double mean;
     private double stddev;
-    double confidenceLo;
-    double confidenceHi;
+    private double confidenceLo;
+    private double confidenceHi;
 
     /**
      * perform trials independent experiments on an n-by-n grid
@@ -27,16 +31,16 @@ public class PercolationStats {
             int row;
             int runs = 0;
 
-            while(!grid.percolates()) {
+            while (!grid.percolates()) {
                 do {
-                    col = StdRandom.uniform(0, n);
-                    row = StdRandom.uniform(0, n);
+                    col = StdRandom.uniform(1, n);
+                    row = StdRandom.uniform(1, n);
                 } while (grid.isOpen(row, col));
                 grid.open(row, col);
                 runs++;
             }
 
-           double percolationThreslhold = runs / (double)(n * n);
+           double percolationThreslhold = runs / (double) (n * n);
             thresholds[trial] = percolationThreslhold;
         }
         mean = StdStats.mean(thresholds);
@@ -69,9 +73,9 @@ public class PercolationStats {
 
     // test client (described below)
     public static void main(String[] args) {
-        int N = StdIn.readInt();
-        int T = StdIn.readInt();
-        PercolationStats stats = new PercolationStats(N, T);
+        int n = StdIn.readInt();
+        int t = StdIn.readInt();
+        PercolationStats stats = new PercolationStats(n, t);
 
         System.out.println("Mean                    = " + stats.mean());
         System.out.println("Standard Deviation      = " + stats.stddev());
