@@ -38,7 +38,7 @@ public class Percolation {
     }
 
     /**
-     * open site (row, col) if it is not open already
+     * open site (row, col) if it is not open already.
      *
      * @param row
      * @param col
