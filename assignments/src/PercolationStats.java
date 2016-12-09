@@ -33,14 +33,9 @@ public class PercolationStats {
 
             while (!grid.percolates()) {
                 do {
-                    col = StdRandom.uniform(1, n);
-                    row = StdRandom.uniform(1, n);
-                    System.out.println("col: " + col);
-                    System.out.println("row: " + row);
-                    System.out.println("check: " + grid.isOpen(row, col));
-
-                } while (!grid.isOpen(row, col));
-                System.out.println("WE OPENING MOTHA");
+                    col = StdRandom.uniform(1, n + 1);
+                    row = StdRandom.uniform(1, n + 1);
+                } while (grid.isOpen(row, col));
                 grid.open(row, col);
                 runs++;
             }
