@@ -2,9 +2,10 @@
 
 https://www.coursera.org/learn/introduction-to-algorithms/home/welcome
 
-## Tech:
+## Technology and Resource
 * Java
 * IntelliJ
+* Algorithms, 4th Edition by Robert Sedgewick and Kevin Wayne
 
 ## Course covers the following topics:
 * Analysis of Algorithms
