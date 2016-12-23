@@ -4,10 +4,6 @@ import java.util.Iterator;
  * Created by tommysander on 12/12/16.
  * Implments a doubly-linked list to enable O(n(1)) removal of last node
  *
- * - Throw a java.lang.NullPointerException if the client attempts to add a null item;
- * - Throw a java.util.NoSuchElementException if the client attempts to remove an item from an empty deque;
- * - Throw a java.lang.UnsupportedOperationException if the client calls the remove() method in the iterator;
- * - Throw a java.util.NoSuchElementException if the client calls the next() method in the iterator and there are no more items to return.
  */
 public class Deque<Item> implements Iterable<Item> {
 
@@ -144,9 +140,15 @@ public class Deque<Item> implements Iterable<Item> {
             return current != null;
         }
 
-        public void remove() {}
+        public void remove() {
+            throw new java.lang.UnsupportedOperationException("Remove method not available");
+        }
 
         public Item next() {
+            if (current.next == null) {
+                throw new java.util.NoSuchElementException("End of list, no next element");
+            }
+
             Item item = current.item;
             current = current.next;
             return item;
