@@ -10,11 +10,15 @@ import java.util.Iterator;
  */
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
+    private Item[] queue;
+    private int size;
+
     /**
      * construct an empty randomized queue
      */
     public RandomizedQueue() {
-
+        queue = (Item[]) new Object[2];
+        size = 0;
     }
 
     /**
