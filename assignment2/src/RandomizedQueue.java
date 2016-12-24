@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import edu.princeton.cs.algs4.StdRandom.*;
 
 /**
  * Created by tommysander on 12/12/16.
@@ -25,24 +26,33 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
      * is the queue empty?
      */
     public boolean isEmpty() {
+        return size == 0;
     }
 
     /**
      * return the number of items on the queue
      */
     public int size() {
+        return size;
     }
 
     /**
      * add the item
      */
     public void enqueue(Item item) {
+        if (size == queue.length) { this.resize(2 * queue.length);}
+        // Shuffle on each enqueu
+        // Uses Knuth shuffle with O(n())
+            queue[size++] = item;
+        StdRandom.shuffle(queue);
     }
 
     /**
      * remove and return a random item
      */
     public Item dequeue() {
+        if(this.isEmpty()) { throw new java.util.NoSuchElementException("No items in queue");}
+        // shrink size of array if necessary
     }
 
     /**
@@ -61,6 +71,13 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
      * unit testing
      */
     public static void main(String[] args) {
+    }
+    private void resize(int capacity) {
+       Item[] temp = (Item[]) new Object[capacity];
+        for (int i = 0; i < size; i++) {
+            temp[i] = queue[i];
+        }
+        queue = temp;
     }
 }
 
