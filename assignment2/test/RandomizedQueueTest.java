@@ -1,6 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Iterator;
+
 import static org.junit.Assert.*;
 
 /**
@@ -61,6 +63,17 @@ public class RandomizedQueueTest {
 
     @Test
     public void testIterator() throws Exception {
-
+        queue.enqueue(1);
+        queue.enqueue(2);
+        queue.enqueue(3);
+        queue.enqueue(4);
+        queue.enqueue(5);
+        Iterator<Integer> it = queue.iterator();
+        Iterator<Integer> it2 = queue.iterator();
+        assertTrue(it.hasNext());
+        assertTrue(it2.hasNext());
+        int itItem = it.next();
+        int itItem2 = it2.next();
+        assertNotSame(itItem, itItem2);
     }
 }

@@ -76,12 +76,11 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     private class RandomizedQueueIterator implements Iterator<Item> {
-        private int i;
         private int iteratorSize;
         private Item[] iteratorQueue;
 
 
-        public void RadomizeQueueIterator() {
+        public RandomizedQueueIterator() {
             iteratorQueue = (Item[]) new Object[size];
             for (int i = 0; i < size; i++) {
                 iteratorQueue[i] = queue[i];
@@ -90,7 +89,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
 
         public boolean hasNext() {
-            return i < iteratorSize;
+            return iteratorSize > 0;
         }
         public Item next() {
             if(!this.hasNext()) { throw new java.util.NoSuchElementException("No more items");}
