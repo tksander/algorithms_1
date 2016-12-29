@@ -35,9 +35,8 @@ public class DequeTest {
     @Test
     public void testAddFirst() throws Exception {
         deque.addFirst(1);
-        deque.addFirst(2);
         Integer first = deque.removeFirst();
-        assertSame("should be same", 2, first);
+        assertSame("should be same", 1, first);
     }
 
     @Test

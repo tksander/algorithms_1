@@ -101,8 +101,8 @@ public class Deque<Item> implements Iterable<Item> {
             throw new java.util.NoSuchElementException("No elements in Deque, cannot remove");
         }
         Node oldFirst = first;
-        first = oldFirst.next;
         first.prev = null;
+        first = oldFirst.next;
         numberItems--;
         return oldFirst.item;
     }
