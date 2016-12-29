@@ -1,11 +1,11 @@
 # Algorithms, Part I - Princeton Unversity
 
-https://www.coursera.org/learn/introduction-to-algorithms/home/welcome
+https://www.coursera.org/learn/algorithms-part1
 
-## Technology and Resource
+## Technology and Resources
 * Java
 * IntelliJ
-* Algorithms, 4th Edition by Robert Sedgewick and Kevin Wayne
+* Algorithms, 4th Edition by Robert Sedgewick and Kevin Wayne. Online version available [here](http://algs4.cs.princeton.edu/home/)
 
 ## Course covers the following topics:
 * Analysis of Algorithms
